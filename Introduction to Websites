@@ -1,0 +1,109 @@
+Task 1: Selenium script for Firefox browser in Java
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class Task1 {
+    public static void main(String[] args) {
+        // Set the path for the GeckoDriver executable
+        System.setProperty("webdriver.gecko.driver", "path/to/geckodriver");
+
+        // Initialize the Firefox driver
+        WebDriver driver = new FirefoxDriver();
+
+        try {
+            // Maximize the browser window
+            driver.manage().window().maximize();
+
+            // Navigate to google.com
+            driver.get("http://google.com");
+
+            // Print the URL of the current page
+            System.out.println("Current URL: " + driver.getCurrentUrl());
+
+            // Reload the page
+            driver.navigate().refresh();
+        } finally {
+            // Close the browser
+            driver.quit();
+        }
+    }
+}
+
+Task 2: Selenium script for Chrome browser in Java
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Task2 {
+    public static void main(String[] args) {
+        // Set the path for the ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Initialize the Chrome driver
+        WebDriver driver = new ChromeDriver();
+
+        try {
+            // Maximize the browser window
+            driver.manage().window().maximize();
+
+            // Navigate to demoblaze.com
+            driver.get("https://www.demoblaze.com/");
+
+            // Verify if the title of the page is "STORE"
+            if ("STORE".equals(driver.getTitle())) {
+                System.out.println("Page landed on correct website");
+            } else {
+                System.out.println("Page not landed on correct website");
+            }
+        } finally {
+            // Close the browser
+            driver.quit();
+        }
+    }
+}
+
+Task 3: Selenium script for Chrome browser in Java
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class Task3 {
+    public static void main(String[] args) {
+        // Set the path for the ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Initialize the Chrome driver
+        WebDriver driver = new ChromeDriver();
+
+        try {
+            // Maximize the browser window
+            driver.manage().window().maximize();
+
+            // Navigate to wikipedia.org
+            driver.get("https://www.wikipedia.org/");
+
+            // Search for the query "Artificial Intelligence"
+            WebElement searchBox = driver.findElement(By.name("search"));
+            searchBox.sendKeys("Artificial Intelligence");
+            searchBox.sendKeys(Keys.RETURN);
+
+            // Wait until the search results are loaded
+            WebDriverWait wait = new WebDriverWait(driver, 10);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.id("mw-content-text")));
+
+            // Click on the "History" section in the search results
+            WebElement historyLink = driver.findElement(By.partialLinkText("History"));
+            historyLink.click();
+
+            // Print the title of the section
+            WebElement sectionTitle = driver.findElement(By.id("firstHeading"));
+            System.out.println("Section title: " + sectionTitle.getText());
+        } finally {
+            // Close the browser
+            driver.quit();
+        }
+    }
+}
